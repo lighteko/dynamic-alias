@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watcher": "tsx src/watcher.ts",
+    "parser": "tsx src/parser.ts"
   },
   "repository": {
     "type": "git",
@@ -18,12 +20,20 @@
   },
   "homepage": "https://github.com/lighteko/dynamic-alias#readme",
   "devDependencies": {
+    "@babel/generator": "^7.26.10",
+    "@babel/parser": "^7.26.10",
+    "@babel/traverse": "^7.26.10",
+    "@babel/types": "^7.26.10",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.6",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.5",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "babel": "^5.8.38",
     "chokidar": "^4.0.3",
     "commander": "^13.1.0",
     "fs-extra": "^11.3.0"
