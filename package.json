@@ -1,41 +1,55 @@
 {
   "name": "dynamic-alias",
-  "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "displayName": "Dynamic Alias",
+  "description": "Dynamic Alias automatically resolves and updates import paths in your project, ensuring that alias-based imports are always correctly mapped.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.98.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "dynamic-alias.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watcher": "tsx src/watcher.ts",
-    "parser": "tsx src/parser.ts"
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lighteko/dynamic-alias.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lighteko/dynamic-alias/issues"
-  },
-  "homepage": "https://github.com/lighteko/dynamic-alias#readme",
   "devDependencies": {
-    "@babel/generator": "^7.26.10",
-    "@babel/parser": "^7.26.10",
-    "@babel/traverse": "^7.26.10",
-    "@babel/types": "^7.26.10",
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.6",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.13.5",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.19.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.98.0",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.21.0",
+    "npm-run-all": "^4.1.5",
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "babel": "^5.8.38",
-    "chokidar": "^4.0.3",
-    "commander": "^13.1.0",
-    "fs-extra": "^11.3.0"
+    "@babel/parser": "^7.26.10",
+    "@babel/traverse": "^7.26.10"
   }
 }
